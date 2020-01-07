@@ -1,40 +1,44 @@
 {
-    "interactionModel": {
-        "languageModel": {
-            "invocationName": "laundry room",
-            "intents": [
-                {
-                    "name": "GetMachineAvailability",
-                    "slots": [
-                        {
+  "interactionModel": {
+      "languageModel": {
+          "invocationName": "laundry room",
+          "intents": [
+              {
+                  "name": "GetMachineAvailability",
+                  "slots": [
+                      {
                           "name": "machine",
                           "type": "DRYER_OR_WASHER"
-                        }
-                    ],
-                    "samples": [
-                        "are there any {machine}",
-                        "are there any {machine} open",
-                        "are there any {machine} Available"
-                    ]
-                }
-            ],
-            "types": [
-                {
-                  "values": [
-                    {
-                      "name": {
-                        "value": "dryers"
                       }
-                    },
-                    {
-                      "name": {
-                        "value": "washing machines"
-                      }
-                    }
                   ],
-                  "name": "DRYER_OR_WASHER"
-                }
-              ]
-        }
-    }
+                  "samples": [
+                      "are there any {machine}",
+                      "are there any {machine} open",
+                      "are there any {machine} Available"
+                  ]
+              },
+              {
+                  "name": "AMAZON.StopIntent",
+                  "samples": []
+              }
+          ],
+          "types": [
+              {
+                  "name": "DRYER_OR_WASHER",
+                  "values": [
+                      {
+                          "name": {
+                              "value": "dryers"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "washing machines"
+                          }
+                      }
+                  ]
+              }
+          ]
+      }
+  }
 }
