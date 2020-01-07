@@ -1,44 +1,53 @@
 {
-  "interactionModel": {
-      "languageModel": {
-          "invocationName": "laundry room",
-          "intents": [
-              {
-                  "name": "GetMachineAvailability",
-                  "slots": [
-                      {
-                          "name": "machine",
-                          "type": "DRYER_OR_WASHER"
-                      }
-                  ],
-                  "samples": [
-                      "are there any {machine}",
-                      "are there any {machine} open",
-                      "are there any {machine} Available"
-                  ]
-              },
-              {
-                  "name": "AMAZON.StopIntent",
-                  "samples": []
-              }
-          ],
-          "types": [
-              {
-                  "name": "DRYER_OR_WASHER",
-                  "values": [
-                      {
-                          "name": {
-                              "value": "dryers"
-                          }
-                      },
-                      {
-                          "name": {
-                              "value": "washing machines"
-                          }
-                      }
-                  ]
-              }
-          ]
-      }
-  }
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "laundry room",
+            "intents": [
+                {
+                    "name": "GetMachineAvailability",
+                    "slots": [
+                        {
+                            "name": "machine",
+                            "type": "DRYER_OR_WASHER"
+                        }
+                    ],
+                    "samples": [
+                        "are there any {machine}",
+                        "are there any {machine} open",
+                        "are there any {machine} Available"
+                    ]
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                }
+            ],
+            "types": [
+                {
+                    "name": "DRYER_OR_WASHER",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "dryers"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "washing machines"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "machines"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
 }
