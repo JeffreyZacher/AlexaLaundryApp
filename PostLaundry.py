@@ -2,6 +2,9 @@ import requests
 import re
 import urllib.parse
 
+# Url of the website to get the information from
+url = "https://www.mywavevision.com/Index.aspx"
+
 # Creates the body of the call
 # needs to have a file called Credentials.txt in the same directory as this file and with line1 being username and line2 being password
 # Username must have no spaces in it
@@ -26,14 +29,13 @@ def GetHeaders():
     'cache-control': "no-cache"
     }
 
-# Url of the website to get the information from
-url = "https://www.mywavevision.com/Index.aspx"
+def GetMachines():
+    # this request is just so we can grab the Viewstate from the response since that will change over time
+    response = requests.request("POST", url, data=GetPayload(""), headers=GetHeaders())
 
-# this request is just so we can grab the Viewstate from the response since that will change over time
-response = requests.request("POST", url, data=GetPayload(""), headers=GetHeaders())
+    # This request will return the new page that contains machine data
+    if "<title>Welcome to WaveVision</title>" in response.text:
+        response = requests.request("Post", url, data=GetPayload(re.findall(r"id=\"__VIEWSTATE\" value=\"(.*)\" /\>", response.text)[0]), headers=GetHeaders())
 
-# This request will return the new page that contains machine data
-response = requests.request("Post", url, data=GetPayload(re.findall(r"id=\"__VIEWSTATE\" value=\"(.*)\" /\>", response.text)[0]), headers=GetHeaders())
-
-# this will create a tuple of the machines and their availability
-Machines = re.findall(r"ContentPlaceHolder1_gvRoom_lblMachineID_\d\"\>(\w+\s\d)(?:.*\n){5}.*ContentPlaceHolder1_gvRoom_lblStatus_\d\"\>(\w+)", response.text)
+    # this will create a tuple of the machines and their availability
+    return re.findall(r"ContentPlaceHolder1_gvRoom_lblMachineID_\d\"\>(\w+\s\d)(?:.*\n){5}.*ContentPlaceHolder1_gvRoom_lblStatus_\d\"\>(\w+)", response.text)
